@@ -1,33 +1,29 @@
-import { Footer } from '@/app/_components/layout/footer';
-import DeployButton from '@/app/_components/widgets/deploy-button';
-import { EnvVarWarning } from '@/app/_components/widgets/env-var-warning';
-import HeaderAuth from '@/app/_components/widgets/header-auth';
-import { APP_DESCRIPTION, APP_TITLE } from '@/app/_constants/config';
-import { hasEnvVars } from '@/app/_utils/supabase/check-env-vars';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { ThemeProvider } from 'next-themes';
-import { Geist } from 'next/font/google';
-import Link from 'next/link';
-import React from 'react';
-import './globals.css';
+import { Footer } from "@/app/_components/layout/footer";
+import { Header } from "@/app/_components/layout/header";
+import { APP_DESCRIPTION, APP_TITLE } from "@/app/_constants/config";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "next-themes";
+import { Geist } from "next/font/google";
+import React from "react";
+import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+  : "http://localhost:3000";
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: APP_TITLE,
-  description: APP_DESCRIPTION
+  description: APP_DESCRIPTION,
 };
 
 const geistSans = Geist({
-  display: 'swap',
-  subsets: ['latin']
+  display: "swap",
+  subsets: ["latin"],
 });
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -42,17 +38,7 @@ export default function RootLayout({
         >
           <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col gap-20 items-center">
-              <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-                <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-                  <div className="flex gap-5 items-center font-semibold">
-                    <Link href={'/'}>Next.js Supabase Starter</Link>
-                    <div className="flex items-center gap-2">
-                      <DeployButton />
-                    </div>
-                  </div>
-                  {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
-                </div>
-              </nav>
+              <Header />
               <div className="flex flex-col gap-20 max-w-5xl p-5">
                 {children}
                 <SpeedInsights />

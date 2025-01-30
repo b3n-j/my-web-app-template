@@ -1,7 +1,7 @@
 import { Button } from '@/app/_components/ui/button';
 import Link from 'next/link';
 
-export default function DeployButton() {
+export function DeployButton() {
   return (
     <>
       <Link
